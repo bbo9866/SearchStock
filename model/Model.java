@@ -1,6 +1,19 @@
 package model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Model {
+	
+	private static Model model = new Model();
+	
+	private Model( ) {}
+	
+	public static Model getModel( ) {
+		return model;
+	}
 
 	// 모든 종목 출력 쿼리 파라미터는 없음
 	public static Stock[] searchAll() {
@@ -58,13 +71,14 @@ public class Model {
 		Stock findingStock = null;
 		for(int i = 0; i < stockList.length;i++) {
 			
-			if(stockList[i].companyName == stockName) {
+			if(stockList[i].companyName.equals(stockName)) {
 				findingStock = stockList[i];
 				return findingStock;
 			} 
 		}
 		throw new Exception ("일치하는 주식이 없습니다.");
 	}
+
 	
 //		if(findingStock != null) {
 //			System.out.println("입력한 종목명은> " + stockName + "입니다.");
